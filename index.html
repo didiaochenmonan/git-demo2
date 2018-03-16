@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>Document</title>
+    <div class="box">
+        <div style='width: 30%;float: left;'>1</div>
+        <div style='width: 30%;float: left;'>
+            2
+        </div>
+        <div style='width: 30%;float: left;'>
+            3
+        </div>
+    </div>
+
+</head>
+<body>
+    <script>
+    var data =
+    [
+    {
+        path: '/commodity',
+        icon: 'android-checkbox',
+        name: 'commodity',
+        title: '商品管理',
+        code:1,
+        component: "Main",
+        children: [
+            { path: 'commodityManagement',
+              title: '商品列表',
+              icon: 'arrow-swap',
+              name: 'commodityManagement',
+              resourceCode:1,
+              component: 'commodity/commodity-management/commodity-management'
+            },
+            { path: 'systematicManagement',
+              title: '分类列表',
+              icon: 'arrow-swap',
+              name: 'systematicManagement',
+              resourceCode: 6,
+              component: 'commodity/systematic-management/systematic-management'
+            },
+            { path: 'parameterManagement',
+              title: '参数列表',
+              icon: 'arrow-swap',
+              name: 'parameterManagement',
+              resourceCode:4,
+              component: 'commodity/parameter-management/parameter-management'
+            },
+            { path: 'brandManagement',
+              title: '品牌列表',
+              icon: 'arrow-swap',
+              name: 'brandManagement',
+              resourceCode:5,
+              component: 'commodity/brand-management/brand-management'
+            },
+            { path: 'specificationManagement',
+              title: '规格列表',
+              icon: 'arrow-swap',
+              resourceCode: 7,
+              name: 'specificationManagement',
+              component: 'commodity/specification-management/specification-management'
+            },
+            { path: 'commodityAudit',
+              title: '待审核商品列表',
+              icon: 'arrow-swap',
+              name: 'commodityAudit',
+              resourceCode:8,
+              component: 'commodity/commodity-audit/commodity-audit'
+            },
+            { path: 'auditBrand',
+              title: '待审核品牌列表',
+              icon: 'arrow-swap',
+              name: 'auditBrand',
+              resourceCode:9,
+              component: 'commodity/audit-brand/audit-brand'
+            },
+            { path: 'typeList',
+              title: '类型列表',
+              icon: 'arrow-swap',
+              name: 'typeList',
+              resourceCode:10,
+              component: 'commodity/type-list/type-list'
+            },
+        ]
+    },
+        {
+        path: '/order-management',
+        icon: 'android-checkbox',
+        name: 'order-management',
+        title: '订单管理',
+        code:2,
+        component: 'Main',
+        children: [
+            { path: 'orderManagement',
+              title: '订单列表',
+              name: 'orderManagement',
+              icon: 'arrow-swap',
+              resourceCode:2,
+              component: 'order/order-management/order-management'
+            },
+            { path: 'refundManagement',
+              title: '退款/退货列表',
+              name: 'refundManagement',
+              icon: 'arrow-swap',
+              resourceCode:3,
+              component: 'order/refund-management/refund-management'
+            }
+
+        ]
+    },
+]
+var newData = [
+{
+    "code":1,
+    "children":[
+        {
+            "resourceCode":1
+        },
+        {
+            "resourceCode":5
+        },
+        {
+            "resourceCode":7
+        },
+        {
+           "resourceCode":4
+        }
+    ]
+},
+{
+    "code":2,
+    "children":[
+        {
+            "resourceCode":2
+        }
+
+    ]
+}
+]
+
+    function abc(a,b){
+        var arr = a.filter(function(item,index) {
+            if(b[index]){
+                return item.code == b[index].code
+            }
+        });
+        let atr =[]
+        for(var n=0;n<arr.length;n++){
+            newData[n].children.forEach((item)=>{
+                atr.push(item.resourceCode)
+            })
+        }
+
+        for(var n=0;n<arr.length;n++){
+            var childrenDate =arr[n].children.filter((item,index)=>{
+                return atr.indexOf(item.resourceCode) != -1
+
+            })
+            arr[n].children = childrenDate;
+
+        }
+            console.log(arr)
+
+    }
+    abc(data,newData)
+
+
+    </script>
+</body>
+</html>
